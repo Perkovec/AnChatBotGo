@@ -159,7 +159,7 @@ func (app *App) sendSticker(msg tgapi.Message, user User) {
 					InlineKeyboard: [][]tgapi.InlineKeyboardButton{
 						[]tgapi.InlineKeyboardButton{
 							tgapi.InlineKeyboardButton{
-								Text:         receiver.Name,
+								Text:         user.Name,
 								CallbackData: "sticker_button",
 							},
 						},
