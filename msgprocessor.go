@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/perkovec/AnChatBotGo/commands"
+	"github.com/perkovec/AnChatBotGo/i18n"
 	"github.com/perkovec/AnChatBotGo/tgapi"
 )
 
@@ -70,4 +71,20 @@ func ProcessMsg(app commands.App, msg tgapi.Message) {
 	} else {
 		app.BroadcastMessage(msg)
 	}
+}
+
+func ProcessError(app commands.App, msg tgapi.Message, err string) {
+	fmt.Println("kok")
+	if err == "Forbidden: Bot was blocked by the user" {
+		user, _ := app.GetUserByTgID(msg.From.ID)
+		fmt.Println(user.Name)
+		app.BanUserByTgID(msg.From.ID)
+		app.BroadcastPlainMessage(
+			fmt.Sprintf(i18n.RuLocal["leave_chat_with_ban"], user.Name),
+			msg.From.ID,
+			"",
+			0, 0,
+		)
+	}
+	fmt.Println(err)
 }

@@ -27,4 +27,5 @@ var RuLocal = map[string]string{
 	"info_online":        "[BOT] Информация о '%s':\nВ чате уже %s\nПоследний онлайн: онлайн",
 	"user_not_found":     "[BOT] Пользователь не найден.",
 	"me":                 "'%s' <i>%s</i>",
+	"leave_chat_with_ban": "[BOT] '%s' забанил бота.",
 }

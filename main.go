@@ -10,7 +10,7 @@ import (
 	"github.com/perkovec/AnChatBotGo/tgapi"
 )
 
-const token = "YOUR_TOKEN"
+const token = "294497096:AAEHhOZV2EtQbmjDwjbVQB7KFAaAJeHAcxI"
 
 func main() {
 	session, err := mgo.Dial("mongodb://localhost")
@@ -35,6 +35,10 @@ func main() {
 
 	messages := make(chan tgapi.Message)
 	updates := make(chan tgapi.Message)
+
+	bot.OnError = func(msg tgapi.Message, err string) {
+		ProcessError(myApp, msg, err)
+	}
 
 	go bot.Polling(messages, updates)
 	go newUpdates(myApp, updates)

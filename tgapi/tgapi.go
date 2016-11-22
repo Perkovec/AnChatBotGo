@@ -4,9 +4,10 @@ import "log"
 
 // Bot instance
 type Bot struct {
-	Token  string
-	Offset int
-	Info   User
+	Token   string
+	Offset  int
+	Info    User
+	OnError func(Message, string)
 }
 
 // Create bot

@@ -114,6 +114,11 @@ func (bot *Bot) SendMessage(chatID int, text string, options *SendMessageOpts) (
 	}
 
 	if !res.Ok {
+		bot.OnError(Message{
+			From: User{
+				ID: chatID,
+			},
+		}, res.Description)
 		return Message{}, fmt.Errorf("SendMessage error (tglib - tg): %s", res.Description)
 	}
 
@@ -147,6 +152,11 @@ func (bot *Bot) SendAudio(chatID int, audio string, options *SendAudioOpts) (Mes
 	}
 
 	if !res.Ok {
+		bot.OnError(Message{
+			From: User{
+				ID: chatID,
+			},
+		}, res.Description)
 		return Message{}, fmt.Errorf("SendAudio error (tglib - tg): %s", res.Description)
 	}
 
@@ -180,6 +190,11 @@ func (bot *Bot) SendPhoto(chatID int, photo string, options *SendPhotoOpts) (Mes
 	}
 
 	if !res.Ok {
+		bot.OnError(Message{
+			From: User{
+				ID: chatID,
+			},
+		}, res.Description)
 		return Message{}, fmt.Errorf("SendPhoto error (tglib - tg): %s", err)
 	}
 
@@ -212,6 +227,11 @@ func (bot *Bot) SendDocument(chatID int, document string, options *SendDocumentO
 	}
 
 	if !res.Ok {
+		bot.OnError(Message{
+			From: User{
+				ID: chatID,
+			},
+		}, res.Description)
 		return Message{}, fmt.Errorf("SendDocument error (tglib - tg): %s", err)
 	}
 
@@ -245,6 +265,11 @@ func (bot *Bot) SendSticker(chatID int, sticker string, options *SendStickerOpts
 	}
 
 	if !res.Ok {
+		bot.OnError(Message{
+			From: User{
+				ID: chatID,
+			},
+		}, res.Description)
 		return Message{}, fmt.Errorf("SendSticker error (tglib - tg): %s", err)
 	}
 
@@ -278,6 +303,11 @@ func (bot *Bot) SendVideo(chatID int, video string, options *SendVideoOpts) (Mes
 	}
 
 	if !res.Ok {
+		bot.OnError(Message{
+			From: User{
+				ID: chatID,
+			},
+		}, res.Description)
 		return Message{}, fmt.Errorf("SendVideo error (tglib - tg): %s", err)
 	}
 
@@ -311,6 +341,11 @@ func (bot *Bot) SendVoice(chatID int, voice string, options *SendVoiceOpts) (Mes
 	}
 
 	if !res.Ok {
+		bot.OnError(Message{
+			From: User{
+				ID: chatID,
+			},
+		}, res.Description)
 		return Message{}, fmt.Errorf("SendVoice error (tglib - tg): %s", err)
 	}
 
@@ -341,6 +376,12 @@ func (bot *Bot) EditMessageCaption(options *EditMessageCaptionOpts) (Message, er
 	}
 
 	if !res.Ok {
+		ichatID, _ := strconv.Atoi(options.ChatID)
+		bot.OnError(Message{
+			From: User{
+				ID: ichatID,
+			},
+		}, res.Description)
 		return Message{}, fmt.Errorf("EditMessageCaption error (tglib - tg): %s", err)
 	}
 
@@ -373,6 +414,12 @@ func (bot *Bot) EditMessageText(text string, options *EditMessageTextOpts) (Mess
 	}
 
 	if !res.Ok {
+		ichatID, _ := strconv.Atoi(options.ChatID)
+		bot.OnError(Message{
+			From: User{
+				ID: ichatID,
+			},
+		}, res.Description)
 		return Message{}, fmt.Errorf("EditMessageText error (tglib - tg): %s", err)
 	}
 

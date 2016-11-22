@@ -44,6 +44,14 @@ func (app *App) UpdateUserLastMessage(userid int) error {
 	})
 }
 
+func (app *App) BanUserByTgID(userid int) error {
+	return app.UsersC.Update(bson.M{"tg_id": userid}, bson.M{
+		"$set": bson.M{
+			"banned": true,
+		},
+	})
+}
+
 func (app *App) GetUserByNick(nick string) (User, error) {
 	user := User{}
 	err := app.UsersC.Find(bson.M{"name": nick}).One(&user)
