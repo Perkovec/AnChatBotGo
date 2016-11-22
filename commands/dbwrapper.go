@@ -14,13 +14,13 @@ func (app *App) GetUserByTgID(userID int) (User, error) {
 
 func (app *App) GetChatUsers() ([]User, error) {
 	users := []User{}
-	err := app.UsersC.Find(nil).All(&users)
+	err := app.UsersC.Find(bson.M{"is_chat_user": true, "banned": false}).All(&users)
 	return users, err
 }
 
 func (app *App) GetRecentChatUsers() ([]User, error) {
 	users := []User{}
-	err := app.UsersC.Find(nil).Sort("-last_message").All(&users)
+	err := app.UsersC.Find(bson.M{"is_chat_user": true, "banned": false}).Sort("-last_message").All(&users)
 	return users, err
 }
 
